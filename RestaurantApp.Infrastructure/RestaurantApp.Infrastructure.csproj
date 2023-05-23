@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="34.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RestaurantApp.Application\RestaurantApp.Application.csproj" />
+    <ProjectReference Include="..\RestaurantApp.Domain\RestaurantApp.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
