@@ -11,7 +11,7 @@ namespace RestaurantApp.IntegrationTests
             claimsPrinciple.AddIdentity(new ClaimsIdentity(
                 new[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, "TestUser"),
+                    new Claim(ClaimTypes.NameIdentifier, "123"),
                     new Claim(ClaimTypes.Role, "Admin")
                 }));
             context.HttpContext.User = claimsPrinciple;

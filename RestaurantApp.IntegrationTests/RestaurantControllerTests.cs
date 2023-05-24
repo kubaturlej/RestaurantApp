@@ -50,7 +50,7 @@ namespace RestaurantApp.IntegrationTests
         {
             //arragne
 
-            var jsonBody = "{\"searchPhrase\": \"\",\"sortBy\": \"Name\", \"pageNumber\": 1, \"pageSize\": 30, \"sortDirection\": 0}";
+            var jsonBody = "{\"searchPhrase\": \"\",\"sortBy\": \"Name\", \"pageNumber\": 1, \"pageSize\": 5, \"sortDirection\": 0}";
 
             var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
             //act
@@ -69,7 +69,15 @@ namespace RestaurantApp.IntegrationTests
             {
                 Name = "Test Restaurant",
                 City = "Toronto",
-                Street = "Słoneczna 10"
+                Street = "Słoneczna 10",
+                Category = "Test",
+                ContactEmail = "Test",
+                ContactNumber = "Test",
+                Description = "Test",
+                HasDelivery = true,
+                ZipCode = "Test",
+                ImageUrl = "Test",
+                Country = "Test",
             };
 
             var content = model.ToJsonHttpContent();
@@ -120,8 +128,14 @@ namespace RestaurantApp.IntegrationTests
             //arange 
             var restaurant = new Restaurant
             {
-                CreatedById = 1,
-                Name = "Test",
+                CreatedById = 123,   
+                Name = "Test Restaurant",
+                Category = "Test",
+                ContactEmail = "Test",
+                ContactNumber = "Test",
+                Description = "Test",
+                HasDelivery = true,
+                ImageUrl = "Test"
             };
 
             SeedRestaurant(restaurant);
@@ -141,7 +155,13 @@ namespace RestaurantApp.IntegrationTests
             var restaurant = new Restaurant
             {
                 CreatedById = 800,
-                Name = "Test",
+                Name = "Test Restaurant",
+                Category = "Test",
+                ContactEmail = "Test",
+                ContactNumber = "Test",
+                Description = "Test",
+                HasDelivery = true,
+                ImageUrl = "Test"
             };
 
             SeedRestaurant(restaurant);

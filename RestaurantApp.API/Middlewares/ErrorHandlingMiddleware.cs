@@ -7,10 +7,12 @@ namespace RestaurantApp.API.Middlewares
     public class ErrorHandlingMiddleware : IMiddleware
     {
         private readonly ILogger<ErrorHandlingMiddleware> _logger;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger)
+        public ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger, IWebHostEnvironment webHostEnvironment)
         {
             _logger = logger;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -35,8 +37,16 @@ namespace RestaurantApp.API.Middlewares
             {
                 _logger.LogError(e, e.Message);
 
-                context.Response.StatusCode = 500;
-                await context.Response.WriteAsync("Something went wrong");
+                if (_webHostEnvironment.IsDevelopment())
+                {
+                    context.Response.StatusCode = 500;
+                    await context.Response.WriteAsync($"{e.Message}, \n{e.StackTrace}");
+                }
+                else
+                {
+                    context.Response.StatusCode = 500;
+                    await context.Response.WriteAsync("Something went wrong");
+                }
             }
         }
     }

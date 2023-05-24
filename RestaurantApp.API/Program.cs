@@ -1,9 +1,11 @@
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RestaurantApp.API.Middlewares;
+using RestaurantApp.Application.Authorization;
 using RestaurantApp.Application.Contracts;
 using RestaurantApp.Application.Mapping;
 using RestaurantApp.Domain.Entities;
@@ -30,6 +32,8 @@ builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IUserContextService, UserContextService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<ErrorHandlingMiddleware>();
+
+builder.Services.AddScoped<IAuthorizationHandler, ResourceActionsRequirementHandler>();
 
 builder.Services.AddFluentValidation(conf =>
 {

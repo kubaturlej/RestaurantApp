@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -40,7 +41,7 @@ namespace RestaurantApp.Infrastructure.Repositories
 
             newRestaurant.CreatedById = _userContextService.GetUserId;
 
-            _dbContext.Add(newRestaurant);
+            _dbContext.Restaurants.Add(newRestaurant);
 
             await _dbContext.SaveChangesAsync();
 
@@ -54,8 +55,9 @@ namespace RestaurantApp.Infrastructure.Repositories
             if (restaurant == null)
                 throw new NotFoundException($"Nie znaleziono restauracji o Id {id}");
 
+
             var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, restaurant,
-                new ResourceActionsRequirement(ResourceAction.Update)).Result;
+                new ResourceActionsRequirement(ResourceAction.Delete)).Result;
 
             if (!authorizationResult.Succeeded)
             {
