@@ -25,7 +25,8 @@ namespace RestaurantApp.Application.Mapping
                 {
                     City = s.City,
                     Street = s.Street,
-                    ZipCode = s.ZipCode
+                    ZipCode = s.ZipCode,
+                    Country = s.Country
                 }));
         }
     }
